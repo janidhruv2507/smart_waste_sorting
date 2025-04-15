@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Smart Waste Dashboard{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      margin: 0;
+      background: #f0f2f5;
+      color: #333;
+      display: flex;
+    }
+    .sidebar {
+      width: 220px;
+      background: #fff;
+      height: 100vh;
+      padding: 20px 10px;
+      border-right: 1px solid #ddd;
+    }
+    .sidebar h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar li {
+      margin: 15px 0;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .sidebar li:hover, .sidebar .active {
+      background: #d0d6f9;
+      color: #1a1a40;
+    }
+    .main {
+      flex: 1;
+      padding: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Dashboards</h2>
+    <ul>
+      <li class="{% if request.path == '/' %}active{% endif %}">
+        <a href="{{ url_for('home') }}" style="text-decoration: none; color: inherit;">Home</a>
+      </li>
+      <li class="{% if request.path == '/live_feed' %}active{% endif %}">
+        <a href="{{ url_for('live_feed') }}" style="text-decoration: none; color: inherit;">Live Feed</a>
+      </li>
+      <li class="{% if request.path == '/dashboard' %}active{% endif %}">
+        <a href="{{ url_for('dashboard') }}" style="text-decoration: none; color: inherit;">Data Analytics</a>
+      </li>
+      <li><a href="{{ url_for('report') }}">Report</a></li>
+      <li>Settings</li>
+      <li style="color: red; font-weight: bold;">Alerts</li>
+    </ul>
+  </div>
+
+  <div class="main">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

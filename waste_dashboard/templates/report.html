@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Waste Report{% endblock %}
+
+{% block content %}
+  <div class="report-container" style="text-align: center; padding: 40px;">
+    <h1>Waste Report</h1>
+    <p style="font-size: 18px;">This report contains details about the general and medical waste generated over time.</p>
+    <p>Click the button below to download the full report.</p>
+
+    <!-- Button to download the report -->
+    <a href="{{ url_for('download_report') }}" class="btn btn-primary" style="font-size: 18px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Download Report</a>
+  </div>
+{% endblock %}

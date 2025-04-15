@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Waste Dashboard{% endblock %}
+
+{% block content %}
+  <h2>Waste Analytics Dashboard</h2>
+
+  <div class="cards">
+    <!-- General Waste Card -->
+    <div class="card">
+      <h3>General Waste</h3>
+      <h1>3,500 g</h1>
+      <div class="change" style="color: green;">+3.25% since last month</div>
+    </div>
+
+    <!-- Medical Waste Card -->
+    <div class="card">
+      <h3>Medical Waste</h3>
+      <h1>1,500 g</h1>
+      <div class="change" style="color: green;">+6.25% since last month</div>
+    </div>
+
+    <!-- Total Waste Card -->
+    <div class="card">
+      <h3>Total Waste</h3>
+      <h1>5,000 g</h1>
+      <div class="change" style="color: green;">+2.75% since last month</div>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="charts">
+    <div class="chart-container">
+      <h3>General Waste Over Time</h3>
+      <canvas id="generalWasteChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <h3>Medical Waste Over Time</h3>
+      <canvas id="medicalWasteChart"></canvas>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    // General Waste Line Chart (in grams)
+    const generalWasteCtx = document.getElementById('generalWasteChart').getContext('2d');
+    const generalWasteChart = new Chart(generalWasteCtx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+        datasets: [{
+          label: 'General Waste (g)',
+          data: [3000, 2800, 3500, 3300, 3700, 3900, 4000, 4300, 4100, 4600, 5000],
+          borderColor: 'green',
+          backgroundColor: 'rgba(0, 255, 0, 0.2)',
+          fill: true,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 500
+            }
+          }
+        }
+      }
+    });
+
+    // Medical Waste Line Chart (in grams)
+    const medicalWasteCtx = document.getElementById('medicalWasteChart').getContext('2d');
+    const medicalWasteChart = new Chart(medicalWasteCtx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+        datasets: [{
+          label: 'Medical Waste (g)',
+          data: [1300, 1250, 1350, 1400, 1450, 1500, 1480, 1475, 1490, 1495, 1500],
+          borderColor: 'red',
+          backgroundColor: 'rgba(255, 0, 0, 0.2)',
+          fill: true,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 200
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+{% endblock %}
